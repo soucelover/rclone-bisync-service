@@ -29,15 +29,15 @@ if [[ ! -v RCLONE_FLAGS ]]; then
         --drive-skip-shortcuts
         --drive-skip-dangling-shortcuts
     )
-fix
+fi
 
 ${CHECK_ACCESS:-true} && RCLONE_FLAGS+=(--check-access)
 
 echo "Started sync between $LOCAL_DIR and $REMOTE_DIR"
 
 rclone bisync \
-    "$LOCAL_DIR" \
     "$REMOTE_DIR" \
+    "$LOCAL_DIR" \
     --resilient \
     --recover \
     --max-lock 2m \
