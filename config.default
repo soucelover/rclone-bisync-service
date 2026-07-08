@@ -1,0 +1,17 @@
+# Source/Destination arguments to rclone bisync
+LOCAL_DIR="$HOME/Google_Drive"
+REMOTE_DIR="gdrive:"
+
+# Specific rclone flags
+COMPARE="size,modtime"
+MODWINDOW="1s"
+RCLONE_FLAGS=(
+    --create-empty-src-dirs
+    --metadata
+    --track-renames
+    --fix-case
+    --check-access
+    --drive-skip-gdocs
+    --drive-skip-shortcuts
+    --drive-skip-dangling-shortcuts
+)
