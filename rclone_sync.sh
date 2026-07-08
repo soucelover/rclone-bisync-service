@@ -5,9 +5,14 @@ set -euo pipefail
 CONFIG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/rclone-bisync-service/
 CONFIG_PATH=$CONFIG_DIR/config
 
-if [[ -f "$CONFIG_PATH" ]]; then
-    source "$CONFIG_PATH"
+if [[ ! -f "$CONFIG_PATH" ]]; then
+    echo "Copying default configuration"
+
+    mkdir -p "$CONFIG_DIR"
+    cp ./config.default "$CONFIG_PATH"
 fi
+
+source "$CONFIG_PATH"
 
 : "${LOCAL_DIR:=$HOME/Google_Drive}"
 : "${REMOTE_DIR:=gdrive:}"
