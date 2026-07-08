@@ -2,14 +2,14 @@
 
 set -euo pipefail
 
-CONFIG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/rclone-bisync-service/
-CONFIG_PATH=$CONFIG_DIR/config
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/rclone-bisync-service/"
+CONFIG_PATH="$CONFIG_DIR/config"
 
 if [[ ! -f "$CONFIG_PATH" ]]; then
     echo "Copying default configuration"
 
     mkdir -p "$CONFIG_DIR"
-    cp ./config.default "$CONFIG_PATH"
+    cp "$HOME/.local/bin/config.default" "$CONFIG_PATH"
 fi
 
 source "$CONFIG_PATH"
@@ -25,12 +25,13 @@ if [[ ! -v RCLONE_FLAGS ]]; then
         --metadata
         --track-renames
         --fix-case
-        --check-access
         --drive-skip-gdocs
         --drive-skip-shortcuts
         --drive-skip-dangling-shortcuts
     )
-fo
+fix
+
+${CHECK_ACCESS:-true} && RCLONE_FLAGS+=(--check-access)
 
 echo "Started sync between $LOCAL_DIR and $REMOTE_DIR"
 
