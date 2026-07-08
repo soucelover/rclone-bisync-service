@@ -7,7 +7,7 @@ CONFIG_PATH=$CONFIG_DIR/config
 
 mkdir -p $CONFIG_DIR
 
-if [ ! -f "$CONFIG_PATH" ]; then
+if [[ ! -f "$CONFIG_PATH" ]]; then
     install ./config.default $CONFIG_PATH
 fi
 
