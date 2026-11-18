@@ -41,7 +41,7 @@ Type in 'n' to create a new remote and then follow prompts to set it up.
 Update the script's configuration to use the newly created remote. For that, run command:
 
 ```bash
-sh ./edit_config.sh
+bash ./edit_config.sh
 ```
 
 In the file, edit `LOCAL_DIR` and `REMOTE_DIR` variables.
@@ -51,7 +51,7 @@ In the file, edit `LOCAL_DIR` and `REMOTE_DIR` variables.
 Run the following command to install the script as a service:
 
 ```bash
-sh ./install_script.sh
+bash ./install_script.sh
 ```
 
 The synchronisation interval can be customized by setting `SYNC_INTERVAL_MINUTES` environment variable before the setup.

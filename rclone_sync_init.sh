@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+BIN_DIR="$HOME/.local/bin"
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/rclone-bisync-service/"
 CONFIG_PATH="$CONFIG_DIR/config"
 
@@ -9,7 +10,7 @@ if [[ ! -f "$CONFIG_PATH" ]]; then
     echo "Copying default configuration"
 
     mkdir -p "$CONFIG_DIR"
-    cp "$HOME/.local/bin/config.default" "$CONFIG_PATH"
+    cp "$BIN_DIR/rclone_sync_config.default" "$CONFIG_PATH"
 fi
 
 source "$CONFIG_PATH"
@@ -33,7 +34,7 @@ fi
 
 mkdir -p "$LOCAL_DIR"
 
-if [[ ${1:-} == "--resync" ]]; then
+if [[ "${1:-}" == "--resync" ]]; then
     echo "Initializing local directory $LOCAL_DIR from remote $REMOTE_DIR..."
 
     rclone bisync \

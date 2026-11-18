@@ -20,10 +20,10 @@ mkdir -p \
 
 install -m 755 "$SCRIPT_DIR/rclone_sync.sh" "$BIN_DIR/rclone_sync.sh"
 install -m 755 "$SCRIPT_DIR/rclone_sync_init.sh" "$BIN_DIR/rclone_sync_init.sh"
-install -m 755 "$SCRIPT_DIR/config.default" "$BIN_DIR/config.default"
+install -m 644 "$SCRIPT_DIR/config.default" "$BIN_DIR/rclone_sync_config.default"
 
 if [[ ! -f "$CONFIG_FILE" ]]; then
-    cp ./config.default "$CONFIG_FILE"
+    cp "$BIN_DIR/rclone_sync_config.default" "$CONFIG_FILE"
 
     echo "Created default configuration:"
     echo "  $CONFIG_FILE"
