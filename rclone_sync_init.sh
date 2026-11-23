@@ -35,22 +35,18 @@ fi
 mkdir -p "$LOCAL_DIR"
 
 if [[ "${1:-}" == "--resync" ]]; then
-    echo "Initializing local directory $LOCAL_DIR from remote $REMOTE_DIR..."
-
-    rclone bisync \
-        "$REMOTE_DIR" \
-        "$LOCAL_DIR" \
+    echo "Establishing bisync baseline between $REMOTE_DIR and $LOCAL_DIR..."
+    rclone bisync "$REMOTE_DIR" "$LOCAL_DIR" \
         --resync \
+        --resync-mode path1 \
         --max-lock 2m \
         --compare "$COMPARE" \
         --modify-window "$MODWINDOW" \
         "${RCLONE_FLAGS[@]}"
 else
-    echo "Performing initial bisync resync between $LOCAL_DIR and $REMOTE_DIR..."
-    rclone sync \
-        "$REMOTE_DIR" \
-        "$LOCAL_DIR" \
-        --progress \
+    rclone bisync "$REMOTE_DIR" "$LOCAL_DIR" \
+        --max-lock 2m \
+        --compare "$COMPARE" \
         --modify-window "$MODWINDOW" \
         "${RCLONE_FLAGS[@]}"
 fi
